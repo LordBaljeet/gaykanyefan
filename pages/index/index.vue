@@ -32,6 +32,10 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  title: "Memory Cards",
+  layout: "main"
+})
 import type { Card } from '~/model/MemoryCard';
 
 

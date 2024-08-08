@@ -6,7 +6,6 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
-    '@nuxtjs/color-mode',
     'nuxt-quasar-ui',
     '@vesp/nuxt-fontawesome'
   ],
@@ -16,11 +15,11 @@ export default defineNuxtConfig({
     },
     plugins: ['Dark'],
     config: {
-      dark: "auto",
+      dark: true,
       brand: {
         text: '#eae9fc',
         primary: '#0f07c3',
-        secondary: '#5851cf',
+        secondary: '#3e37c5',
         accent: '#5af726',
   
         dark: '#060609',
@@ -31,6 +30,12 @@ export default defineNuxtConfig({
         info: '#31CCEC',
         warning: '#F2C037',
       }
+    }
+  },
+  app: {
+    pageTransition: {
+      name: 'page',
+      mode: 'out-in'
     }
   }
 })

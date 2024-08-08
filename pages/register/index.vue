@@ -1,12 +1,18 @@
 <template>
-    <AuthCard title="Login" :providers="providers" v-model="fields" action="login" :loading="loading"
-        @submit="onSubmit" />
+    <AuthCard 
+        title="Sign Up" 
+        :providers="providers" 
+        v-model="fields"
+        action="register" 
+        :loading="loading"
+        @submit="onSubmit"
+    />
 </template>
 
 <script setup lang="ts">
 
 definePageMeta({
-    name: 'Login',
+    name: 'Register',
     layout: 'auth',
     pageTransition: {
         name: 'fade',
@@ -14,8 +20,10 @@ definePageMeta({
     },
 })
 import type { FormField, Provider } from '~/utils/types';
+const username = ref('lordbaljeet');
 const email = ref('lordbaljeet@gmail.com');
 const password = ref('Katakuri24');
+const confirmPassword = ref('Katakuri24');
 
 const loading = ref(false);
 
@@ -39,6 +47,18 @@ const router = useRouter();
 
 const fields = ref<FormField[]>([
     {
+        label: 'Username',
+        type: 'text',
+        model: username,
+        rules: [
+            function usernameValidator(value: string) {
+                const regex = new RegExp(/^[\w]{5,}$/)
+                return regex.test(value) || "Invalid username"
+            }
+        ],
+        password: false,
+    },
+    {
         label: 'Email',
         type: 'email',
         model: email,
@@ -61,15 +81,27 @@ const fields = ref<FormField[]>([
             }
         ],
         password: true,
-    }
+    },
+    {
+        label: 'Confirm Password',
+        type: 'password',
+        model: confirmPassword,
+        rules: [
+            function passwordMatch(value: string) {
+                return password.value === value || "Passwords do not match"
+            }
+        ],
+        password: true,
+    },
 ])
 
 async function onSubmit() {
     errors.value = []
     loading.value = true
-    await useFetch('/api/auth/login', {
+    await useFetch('/api/auth/signup', {
         method: 'POST',
         body: {
+            username: username.value,
             email: email.value,
             password: password.value,
         }
@@ -89,7 +121,7 @@ async function onSubmit() {
         else {
             loading.value = false
             console.log(response.data.value);
-            router.push({ path: '/' })
+            router.push({ path: '/login' })
         }
 
     }).catch((error) => {
