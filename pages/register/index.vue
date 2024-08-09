@@ -111,10 +111,9 @@ const auth = useFirebaseAuth()!;
 async function onSubmit() {
 	errors.value = [];
 	loading.value = true;
-	const { signUpWithEmail } = useAuth();
+	const { signUpWithEmail } = useAuth(auth);
 	try {
 		const { data, message } = await signUpWithEmail(
-			auth,
 			username.value,
 			email.value,
 			password.value

@@ -85,9 +85,9 @@ async function onSubmit() {
 	errors.value = [];
 	loading.value = true;
 
-	const { login } = useAuth();
+	const { login } = useAuth(auth);
 	try {
-		const { data: user, message } = await login(auth, email.value, password.value);
+		const { data: user, message } = await login(email.value, password.value);
 		loading.value = false;
 		$q.notify({
 			position: 'bottom-right',

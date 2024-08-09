@@ -21,14 +21,14 @@
 </template>
 
 <script setup lang="ts">
-const { logout } = useAuth();
+const auth = useFirebaseAuth()!;
+const { logout } = useAuth(auth);
 const $q = useQuasar();
 
 const user = useCurrentUser()
-const auth = useFirebaseAuth()!;
 function signOut() {
   try {
-    const { message } = logout(auth);
+    const { message } = logout();
     $q.notify({
       message,
       color: 'positive',

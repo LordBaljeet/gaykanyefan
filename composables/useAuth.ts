@@ -6,9 +6,9 @@ import {
 } from 'firebase/auth';
 
 
-export const useAuth = () => {
+export const useAuth = (auth: Auth) => {
 
-	async function login(auth: Auth, email: string, password: string) {
+	async function login(email: string, password: string) {
 		try {
 			const userCredentials = await signInWithEmailAndPassword(auth!, email, password);
 			return {
@@ -28,7 +28,7 @@ export const useAuth = () => {
 		}
 	}
 
-	function logout(auth: Auth) {
+	function logout() {
 		try {
 			auth!.signOut();
 			return {
@@ -48,7 +48,6 @@ export const useAuth = () => {
 	}
 
 	async function signUpWithEmail(
-		auth: Auth,
 		username: string,
 		email: string,
 		password: string
