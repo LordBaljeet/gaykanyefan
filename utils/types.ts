@@ -2,7 +2,8 @@ import type { Ref } from "vue"
 
 export type Provider = {
     icon: string,
-    label: string
+    label: string,
+    name: string,
 }
 
 export type FormField = {

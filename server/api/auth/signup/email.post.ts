@@ -1,16 +1,18 @@
-// import { signInWithEmailAndPassword } from "firebase/auth";
+// import { createUserWithEmailAndPassword } from "firebase/auth";
 // import { auth } from "@/server/lib/firebase"
 // import { FirebaseError } from "firebase/app";
 // import { useUtils } from "~/server/utils/useUtils";
 
+// const { mapFirebaseError } = useUtils();
+
 // export default defineEventHandler(async (event) => {
-//     const { mapFirebaseError } = useUtils();
-//     const body = await readBody(event)
+//     const body = await readBody(event);
+
 //     try {
-//         const user = await signInWithEmailAndPassword(auth, body.email, body.password)
+//         const user = await createUserWithEmailAndPassword(auth, body.email, body.password)
 //         return {
 //             data: user,
-//             message: "Logged in successfully!"
+//             message: "Account successfully created!"
 //         }
 //     } catch(error: any) {
 //         let message;

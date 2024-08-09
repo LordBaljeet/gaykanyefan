@@ -8,7 +8,7 @@
       <q-space />
       <div class="flex q-gutter-sm">
         <ThemeSwitch/>
-        <q-btn color="negative" icon="logout" @click="logout" round flat dense/>
+        <q-btn color="negative" icon="logout" @click="signOut" round flat dense/>
         <q-avatar>
           <q-img
             src="/Gumball.jpg"
@@ -21,12 +21,23 @@
 </template>
 
 <script setup lang="ts">
-const router = useRouter();
-async function logout() {
-  await useFetch('/api/auth/logout', {
-    method: 'POST'
-  });
-  router.push('/login');
+const { logout } = useAuth();
+const $q = useQuasar();
+
+const user = useCurrentUser()
+const auth = useFirebaseAuth()!;
+function signOut() {
+  try {
+    const { message } = logout(auth);
+    $q.notify({
+      message,
+      color: 'positive',
+      position: 'bottom-right',
+      timeout: 2000,
+    });
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 </script>

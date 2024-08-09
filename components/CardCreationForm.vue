@@ -45,7 +45,6 @@ const relations = ref<string[]>([]);
 
 function createMemoryCard() {
     const memoryCard = new Card(title.value, description.value, tags.value);
-    console.log('createMemoryCard', memoryCard);
     emit('created', memoryCard);
     showModal.value = false;
 }

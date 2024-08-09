@@ -34,7 +34,6 @@ const options = ref<string[]>([]);
 const tagSelector = ref();
 
 function newValueAdded(newVal: string, done: any) {
-  console.log('option added');
   addTagToOptions(newVal);
   done(newVal);
 }
